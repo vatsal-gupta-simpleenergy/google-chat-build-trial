@@ -41,10 +41,18 @@ pipeline {
   }
 }
 
-def sendGoogleChatNotification(String message) {
-    sh """
-        curl -X POST -H "Content-Type: application/json" \
-        -d '{"text": "'"${message//\"/\\\"}"'"}' \
-        "$GOOGLE_CHAT_WEBHOOK"
-    """
+def sendGoogleChatNotification(message) {
+    def url = env.GOOGLE_CHAT_WEBHOOK
+    def payload = [
+        text: message
+    ]
+    def response = httpRequest(
+        contentType: 'APPLICATION_JSON',
+        httpMode: 'POST',
+        requestBody: groovy.json.JsonOutput.toJson(payload),
+        url: url
+    )
+    if (response.status != 200) {
+        error "Failed to send message to Google Chat. HTTP status: ${response.status}, Response: ${response.content}"
+    }
 }
