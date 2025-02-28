@@ -1,1 +1,2 @@
-version-v1.0.0-rc.3
+version-v1.0.0-rc.4
+
