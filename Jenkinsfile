@@ -14,8 +14,10 @@ pipeline {
           }
           post {
             success {
+                script {
                 def built_message = "seems like this step is working, successfully built."
                 sendGoogleChatNotification(built_message)
+                }
             }
           }
       }
