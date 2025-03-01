@@ -26,11 +26,27 @@ pipeline {
           steps {
               echo "Running tests..."
           }
+          post {
+            success {
+                script {
+                    def test_message = "test stage works."
+                    sendGoogleChatNotification(test_message)
+                }
+            }
+          }
       }
 
       stage('Deploy') {
           steps {
               echo "Deploying the application..."
+          }
+          post {
+            success {
+                script {
+                    def deploy_message = "its deployed bitch"
+                    sendGoogleChatNotification(deploy_message)
+                }
+            }
           }
       }
   }
