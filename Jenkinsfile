@@ -1,3 +1,5 @@
+// https://chat.googleapis.com/v1/spaces/AAAAWH6z82U/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=0sqp1HU67GRDnTQpOCyuzLwvq53YJ9kyy_uiSDvfWlI
+ 
 pipeline {
   agent any
 
@@ -9,6 +11,12 @@ pipeline {
       stage('Build') {
           steps {
               echo "Building the project..."
+          }
+          post {
+            success {
+                def built_message = "seems like this step is working, successfully built."
+                sendGoogleChatNotification(built_message)
+            }
           }
       }
 
@@ -56,3 +64,4 @@ def sendGoogleChatNotification(message) {
         error "Failed to send message to Google Chat. HTTP status: ${response.status}, Response: ${response.content}"
     }
 }
+    
