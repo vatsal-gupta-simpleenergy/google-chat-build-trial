@@ -106,4 +106,11 @@ def GoogleChatNotification(message){
     def payload = [
         text: message
     ]
+
+    def response = httpRequest(
+        contentType: 'APPLICATION_JSON',
+        httpMode: 'POST',
+        requestBody: groovy.json.JsonOutput.toJson(payload),
+        url: url
+    )
 }
