@@ -85,22 +85,6 @@ pipeline {
   }
 }
 
-// def sendGoogleChatNotification(message) {
-//     def url = env.GOOGLE_CHAT_WEBHOOK
-//     def payload = [
-//         text: message
-//     ]
-//     def response = httpRequest(
-//         contentType: 'APPLICATION_JSON',
-//         httpMode: 'POST',
-//         requestBody: groovy.json.JsonOutput.toJson(payload),
-//         url: url
-//     )
-//     if (response.status != 200) {
-//         error "Failed to send message to Google Chat. HTTP status: ${response.status}, Response: ${response.content}"
-//     }
-// }
-    
 def GoogleChatNotification(message){
     def url = env.GOOGLE_CHAT_WEBHOOK
     def payload = [
@@ -114,6 +98,6 @@ def GoogleChatNotification(message){
         url: url
     )
     if (Response.status!=200) {
-        error "Failed somewhere. HTTP status: ${response.status}, Response: ${response.content}"
+        error "Failed to send message to Google Chat. HTTP status: ${response.status}, Response: ${response.content}"
     }
 }
