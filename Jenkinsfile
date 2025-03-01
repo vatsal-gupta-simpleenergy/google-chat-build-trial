@@ -114,6 +114,6 @@ def GoogleChatNotification(message){
         url: url
     )
     if (Response.status!=200) {
-        error "Failed somewhere. HTTP status: $(response.status), Response: $(response.content)"
+        error "Failed somewhere. HTTP status: ${response.status}, Response: ${response.content}"
     }
 }
