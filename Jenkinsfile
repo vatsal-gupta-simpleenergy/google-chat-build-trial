@@ -19,6 +19,12 @@ pipeline {
                 sendGoogleChatNotification(built_message)
                 }
             }
+            failure {
+                script {
+                    def failure_message = "something fucked up."
+                    sendGoogleChatNotification(failure_message)
+                }
+            }
           }
       }
 
@@ -33,6 +39,12 @@ pipeline {
                     sendGoogleChatNotification(test_message)
                 }
             }
+            failure {
+                script {
+                    def failure_message = "something fucked up."
+                    sendGoogleChatNotification(failure_message)
+                }
+            }
           }
       }
 
@@ -45,6 +57,12 @@ pipeline {
                 script {
                     def deploy_message = "its deployed bitch"
                     sendGoogleChatNotification(deploy_message)
+                }
+            }
+            failure {
+                script {
+                    def failure_message = "something fucked up."
+                    sendGoogleChatNotification(failure_message)
                 }
             }
           }
