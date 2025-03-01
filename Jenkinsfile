@@ -113,4 +113,7 @@ def GoogleChatNotification(message){
         requestBody: groovy.json.JsonOutput.toJson(payload),
         url: url
     )
+    if (Response.status!=200) {
+        error "Failed somewhere. HTTP status: $(response.status), Response: $(response.content)"
+    }
 }
